@@ -11,9 +11,9 @@ describe('<Game />', () => {
     it('Can start a new game', ()=> {
         const wrapper = shallow(<Game />);
         wrapper.setState({
-            guesses = [12, 19, 17],
-            feedback = "You got it",
-            correctAnswer = "-1"
+            guesses : [12, 19, 17],
+            feedback : "You got it",
+            correctAnswer : "-1"
         });
         wrapper.instance().newGame();
         expect(wrapper.state('guesses')).toEqual([]);
@@ -28,19 +28,19 @@ describe('<Game />', () => {
       correctAnswer: 75
     });
 
-    wrapper.instance().makeGuess(30);
+    wrapper.instance().guess(30);
     expect(wrapper.state('guesses')).toEqual([30]);
-    expect(wrapper.state('feedback')).toEqual('You\'re Ice Cold...');
-
-    wrapper.instance().makeGuess(60);
-    expect(wrapper.state('guesses')).toEqual([30, 60]);
     expect(wrapper.state('feedback')).toEqual('You\'re Cold...');
 
-    wrapper.instance().makeGuess(70);
+    wrapper.instance().guess(60);
+    expect(wrapper.state('guesses')).toEqual([30, 60]);
+    expect(wrapper.state('feedback')).toEqual('You\'re Warm');
+
+    wrapper.instance().guess(70);
     expect(wrapper.state('guesses')).toEqual([30, 60, 70]);
     expect(wrapper.state('feedback')).toEqual('You\'re Hot!');
 
-    wrapper.instance().makeGuess(75);
+    wrapper.instance().guess(75);
     expect(wrapper.state('guesses')).toEqual([30, 60, 70, 75]);
     expect(wrapper.state('feedback')).toEqual('You got it!');
   });
